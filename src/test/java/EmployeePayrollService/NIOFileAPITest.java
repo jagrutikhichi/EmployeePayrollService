@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import org.junit.Assert;
@@ -62,9 +63,13 @@ public class NIOFileAPITest {
                 new EmployeePayrollData("Bill Gates", 2, 200000.0),
                 new EmployeePayrollData("Mark Zuckerberg", 3, 300000.0)
         };
-        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService(Arrays.asList(empArray));
         employeePayrollService.writeEmployeeData(EmployeePayrollService.IOService.FILE_IO);
+        employeePayrollService.printData(EmployeePayrollService.IOService.FILE_IO);
+
         long entries = employeePayrollService.countEntries(EmployeePayrollService.IOService.FILE_IO);
+        System.out.println("No.of entries into file are: " + entries);
+
         Assert.assertEquals(3, entries);
     }
 }
